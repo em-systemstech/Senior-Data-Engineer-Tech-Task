@@ -54,6 +54,6 @@ Make sure that your queries can be run against the database created in the ETL.
 5. [ ] **Documentation**: A clear README.md that explains setup, execution, any assumptions made, and any other information you would include in a README.
 
 ## How To Submit Your Solution
-Branch this repository following named using this format `applicant-[yourGithubUsername]`, e.g. user `john-smith` should create a branch `applicant-john-smith`. Commit your changes to your branch, and send a pull request to the main branch. We will review your submission and get back to you with our feedback.
+Branch this repository following this format `applicant-[yourGithubUsername]`, e.g. user `john-smith` should create a branch `applicant-john-smith`. Commit your changes to your branch, and send a pull request to the main branch. We will review your submission and get back to you with our feedback.
 
 Good luck!
