@@ -1,59 +1,75 @@
 # Senior Data Engineer Tech Task
 
 ## Introduction
-This technical challenge is designed to test your expertise in Python and SQL for ETL. 
+This technical challenge is designed to test your expertise in ETL, specifically using GCP services. 
 
-As a Senior Data Engineer, your task is to design a robust ETL pipeline to extract data from an open source API, carry out specified transformations (alternatively, transformations after loading), and load the data into a local database (open for your choice e.g. sqlite3) for analysis. Specifically, you will work with JSONPlaceholder (https://jsonplaceholder.typicode.com/) to simulate working with data from a simple blogging platform.
+As a Senior Data Engineer, your task is to design a production-grade, robust ETL pipeline to extract data from an open source API, set up the pipeline with daily loading, and perform some transformational analysis.
 
-**!!! NOTE: You are not required to spend more than 1.5 Hrs on this task. You are not expected to fully complete this task in this timeframe so if you get stuck, simply proceed with another part of this task and note in your README what steps you would have taken to complete the task.**
+**!!! NOTE: You are not required to spend more than 1.5 Hrs on this task. If you get stuck, simply proceed with another part of this task and include a README in your submission what steps you would have taken to complete the task.**
 
 ## Getting Started
-1. Read through all the instructions before starting.
-2. Clone this repository. Placeholder directories and files have been created to get you started.
-3. Set up a new Python virtual environment and install required dependencies.
-4. Follow the instructions outlined in the [Task Details](#task-details) section.
-   1. [ETL Challenge](#etl-challenge) - Build an ETL pipeline using Python and SQL.
+1. Read through the whole README before starting.
+2. Fork following this format `applicant-[yourGithubUsername]`, e.g. user `john-smith` should use `applicant-john-smith` and clone this repository. Placeholder directories have been created to get you started.
+3. Follow the instructions outlined in the [Task Details](#task-details) section.
+   1. [ETL Challenge](#etl-challenge) - Build an ETL pipeline
    2. [Analysis Challenge](#analysis-challenge) - Write SQL queries to answer the posed questions
-5. Write unit tests to cover your code.
+   3. [Submit](#submit) - Grant us access to the project to evaluate your submission
+4. Write unit tests to cover your code.
 
 ## Task Details
+
+### Resources
+- OpenWeather API (https://openweathermap.org/api) - sign up for a free to use API key.
+- Google Cloud Platform (https://console.cloud.google.com/) - sign up with a new Google account for $300 in free credit (services free below a quota: https://cloud.google.com/free). 
+> [!NOTE]
+> This tech task only requires the free tier of these platforms. GCP will automatically end the trial in 90 days and cap your credits (https://cloud.google.com/signup-faqs).
+> [!CAUTION]
+> If you wish to continue using your credits after this tech task, please decommission any of the charging services and APIs used for this tech task to avoid excessive credit use.
+
 ### ETL Challenge
 
-You may opt to use ELT processes instead of ETL. If you do, use your personal judgement on which steps should follow the 'Load' Step.
+Use your personal judgement to identify appropriate GCP service(s) to construct this pipeline.
 
-1. **Extract**: Retrieve all posts and user data from the `/posts` and `/users` endpoints of JSONPlaceholder API.
-2. **Transform**:
-   - Parse any embedded JSON structures into a format suitable for your database.
-   - Add a computed `status` field to posts: if a post body exceeds 150 characters, set `status` to `lengthy`, and `concise` otherwise.
-   - Combine posts with user details based on `userId` to create enriched post records.
-3. **Load**:
-   - In your database, load the data into table(s) prefixed with your initials, e.g. John Smith will create tables prefixed `js_` 
+1. Load in data from OpenWeather API (https://openweathermap.org/api) back to 2024.
+2. Create pipeline to load new data daily. As this uses GCP services that charges your credits, feel free to simply save your deploy script in this repo and an instructional after testing. You can then delete the service or disable the API.
+3. In BigQuery, load the data into object(s) prefixed with your initials, e.g. John Smith will create object(s) prefixed `js_` 
 
 ### Analysis Challenge
-Write SQL queries to answer the following questions:
-1. Find the top 5 users that post the longest posts (excl. the post title).
-2. For each of these top 5 users, calculate their average post length (incl. the post title).
-3. Identify the day of the week when the most `lengthy` posts are created (mock date using the `id` of posts as the day offset from the UNIX epoch).
+Write SQL queries to answer the following questions use the publicly available dataset `bigquery-public-data.geo_us_boundaries` by matching with the OpenWeatherMap data, all of the questions pertain to the period `March 2024`:
+1. Provide the average daily temperature for each city in each state.
+2. Find the top 3 cities with the highest average humidity in each state.
+3. Find the percentage of cities in each state experiencing "rain" as the weather condition.
 
 Make sure that your queries can be run against the database created in the ETL.
 
+### Submit
+Grant the following people `Editor` access to your GCP project, this is needed to bring your services into our environment which allows you to decommission your services if you wish.
+- tommy.thai@essencemediacom.com
+- charlie.cleaver@essencemediacom.com
+
 ## Deliverables
-1. [ ] **Python ETL** - A Python ETL pipeline script `main.py` that is ready to run.
+1. [ ] **Python ETL** - A production ETL pipeline that is ready to run and deployable.
 2. [ ] **Unit Tests** - A collection of unit tests for your ETL pipeline.
 3. [ ] **SQL** - SQL schema creation file and any additional SQL query files.
 4. [ ] **SQL Answers** - Answers to the SQL analysis challenge questions in a Markdown file, including the SQL queries used.
-5. [ ] **Evidence** - Evidence of successful ETL processing, such as unit test outputs, screenshots, and data files.
+5. [ ] **Evidence** - Any additional evidence not already supplied e.g. deploy scripts and resources for GCP services consuming credits.
 6. [ ] **README** - A detailed README.md that includes all required documentation.
 7. [ ] Any additional documentation you think would be helpful for understanding your approach.
 
 ## Evaluation Criteria
-1. [ ] **Code Quality**: Efficient data manipulation with Python and SQL. Clear, well-structured code that follows best practice to a reasonable extent.
-2. [ ] **SQL Proficiency**: Demonstrate query optimization and complexity in SQL through the analysis challenge.
-3. [ ] **Error Handling**: Gracefully handle potential errors or irregularities in inputs.
+1. [ ] **Code Quality**: Efficient data manipulation with Python and SQL. Clear, well-structured code that clearly has maintainability and collaboration in mind.
+2. [ ] **DB Proficiency**: Demonstrate SQL optimization and complexity through the analysis challenge. And demonstrating understanding of database optimisations with future proofing in mind.
+3. [ ] **Error Handling**: Gracefully handle potential errors or irregularities in data and in process.
 4. [ ] **Testing**: Include unit tests to verify each part of the ETL process.
-5. [ ] **Documentation**: A clear README.md that explains setup, execution, any assumptions made, and any other information you would include in a README.
+5. [ ] **Documentation**: A clear README.md that explains setup, execution, any assumptions made, and any other information you would like to include.
 
 ## How To Submit Your Solution
-Branch this repository following this format `applicant-[yourGithubUsername]`, e.g. user `john-smith` should create a branch `applicant-john-smith`. Commit your changes to your branch, and send a pull request to the main branch. We will review your submission and get back to you with our feedback.
+Fork this repository following this format `applicant-[yourGithubUsername]`, e.g. user `john-smith` should use `applicant-john-smith`. Commit your changes to your repo, and send a pull request to the original repo. 
+
+Grant the following people `Editor` access to your GCP project, this is needed to bring your services into our environment which allows you to decommission your services if you wish.
+- tommy.thai@essencemediacom.com
+- charlie.cleaver@essencemediacom.com
+
+We will review your submission and get back to you with our feedback.
 
 Good luck!
